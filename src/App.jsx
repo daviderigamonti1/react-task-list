@@ -2,13 +2,24 @@ import tasks from "./data/tasks";
 import HeaderComponent from "./components/HeaderComponent";
 
 function App() {
-
   const firstList = tasks.filter((task) => {
     return task.state === "backlog" || task.state === "in_progress";
   });
 
   const firstListItem = firstList.map((task, index) => (
-    <li key={index}>{task.title}</li>
+    <li key={index}><h4>{task.title}</h4>
+      Priority: {task.priority}
+      Est. time {task.estimatedTime}</li>
+  ))
+
+  const secondList = tasks.filter((task) => {
+    return task.state === "completed";
+  });
+
+  const secondListItem = secondList.map((task, index) => (
+    <li key={index}><h4>{task.title}</h4>
+      Priority: {task.priority} <br />
+      Est. time {task.estimatedTime}</li>
   ))
 
   return (
@@ -16,7 +27,7 @@ function App() {
       <HeaderComponent />
       <main>
         <ul>{firstListItem}</ul>
-        <ul></ul>
+        <ul>{secondListItem}</ul>
       </main>
     </>
   );
